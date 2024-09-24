@@ -1,6 +1,6 @@
 [package]
 name = "bpe-tokenizer"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["Stephen Waits <steve@waits.net>"]
 edition = "2021"
 description = "A BPE Tokenizer library."
@@ -35,7 +35,6 @@ lz4_flex = { version = "0.11.3", optional = true }
 serde = { version = "1.0.210", optional = true }
 
 [package.metadata.docs.rs]
-default = []
 all-features = true
 
 [profile.dev]
