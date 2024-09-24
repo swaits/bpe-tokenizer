@@ -1,6 +1,6 @@
 [package]
 name = "bpe-tokenizer"
-version = "0.1.1"
+version = "0.1.2"
 authors = ["Stephen Waits <steve@waits.net>"]
 edition = "2021"
 description = "A BPE Tokenizer library."
