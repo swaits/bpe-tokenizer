@@ -1,0 +1,73 @@
+image: archlinux
+packages:
+  - rustup
+  - cargo-audit
+  - cargo-deny
+  - cargo-msrv
+  - cargo-nextest
+  - cargo-outdated
+  - cargo-tarpaulin
+  - cargo-udeps
+secrets:
+  - 88cce185-d2ec-4573-9546-e33f36f79bbf
+sources:
+  - https://git.sr.ht/~swaits/bpe-tokenizer
+artifacts:
+  - bpe-tokenizer/tarpaulin-report.html
+tasks:
+  - setup: |
+      rustup toolchain install nightly stable
+      cd bpe-tokenizer/
+      rustup run stable cargo fetch
+  - format: |
+      rustup default stable
+      cd bpe-tokenizer/
+      cargo fmt --verbose --check --all
+  - lint: |
+      rustup default stable
+      cd bpe-tokenizer/
+      cargo clippy --verbose --all-targets --all-features
+  - outdated: |
+      rustup default stable
+      cd bpe-tokenizer/
+      cargo outdated
+  - deny: |
+      rustup default stable
+      cd bpe-tokenizer/
+      cargo deny check
+  - udeps: |
+      rustup default nightly
+      cd bpe-tokenizer/
+      cargo +nightly udeps --all-features
+  - audit: |
+      rustup default stable
+      cd bpe-tokenizer/
+      cargo audit -d /tmp/advisory-db
+  - msrv: |
+      rustup default stable
+      cd bpe-tokenizer/
+      cargo msrv verify
+  - coverage: |
+      rustup default stable
+      cd bpe-tokenizer/
+      cargo tarpaulin --verbose --all-features --out html
+  - stable: |
+      rustup default stable
+      cd bpe-tokenizer/
+      cargo build --verbose --all-targets --all-features
+      cargo nextest run --verbose --all-targets --all-features
+  - nightly: |
+      rustup default nightly
+      cd bpe-tokenizer/
+      cargo clippy --verbose --all-targets --all-features  ||:
+      cargo build --verbose --all-targets --all-features   ||:
+      cargo nextest --verbose --all-targets --all-features ||:
+  - docs: |
+      cd bpe-tokenizer/
+      rustup run stable cargo doc --no-deps
+      rustup run nightly cargo doc --no-deps ||:
+  - mirror-to-github: |
+      cd ~/bpe-tokenizer
+      ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
+      git remote add github git@github.com:swaits/bpe-tokenizer.git
+      git push --mirror github

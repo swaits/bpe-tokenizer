@@ -1,0 +1,51 @@
+[package]
+name = "bpe-tokenizer"
+version = "0.1.0"
+authors = ["Stephen Waits <steve@waits.net>"]
+edition = "2021"
+description = "A BPE Tokenizer library."
+keywords = ["byte", "pair", "encoding", "bpe", "tokenizer"]
+categories = ["algorithms", "text-processing"]
+documentation = "https://docs.rs/bpe-tokenizer/"
+readme = "README.md"
+homepage = "https://github.com/swaits/bpe-tokenizer/"
+repository = "https://github.com/swaits/bpe-tokenizer/"
+rust-version = "1.64"
+license-file = "LICENSE"
+
+[dependencies]
+thiserror = "1.0.64"
+unicode-segmentation = "1.12.0"
+
+# optional, only needed when defaul-{small,medium,large} are enabled
+bincode = { version = "1.3.3", optional = true }
+lz4_flex = { version = "0.11.3", optional = true }
+serde = { version = "1.0.210", optional = true }
+
+[features]
+default-small = ["bincode", "lz4_flex", "serde"]
+default-medium = ["bincode", "lz4_flex", "serde"]
+default-large = ["bincode", "lz4_flex", "serde"]
+
+[build-dependencies]
+bincode = { version = "1.3.3", optional = true }
+lz4_flex = { version = "0.11.3", optional = true }
+serde = { version = "1.0.210", optional = true }
+
+[package.metadata.docs.rs]
+default = []
+all-features = true
+
+[profile.dev]
+opt-level = 1
+debug = true
+overflow-checks = true
+
+[profile.release]
+opt-level = 3
+lto = "thin"
+codegen-units = 1
+debug = false
+panic = "abort"
+overflow-checks = false
+strip = "symbols"
