@@ -3,14 +3,10 @@
     feature = "default-medium",
     feature = "default-large"
 ))]
-use lz4_flex::block::compress_prepend_size;
-
-#[cfg(any(
-    feature = "default-small",
-    feature = "default-medium",
-    feature = "default-large"
-))]
-use std::{collections::HashMap, env, fs, path::PathBuf};
+use {
+    lz4_flex::block::compress_prepend_size,
+    std::{collections::HashMap, env, fs, path::PathBuf},
+};
 
 fn main() {
     #[cfg(feature = "default-small")]
