@@ -12,6 +12,8 @@ homepage = "https://github.com/swaits/bpe-tokenizer/"
 repository = "https://github.com/swaits/bpe-tokenizer/"
 rust-version = "1.64"
 license-file = "LICENSE"
+exclude = ["vocab/multi.wiki.bpe.vs1000000.vocab"]
+# ^ default-large vocab is temporarily excluded until we can get a crates.io exception
 
 [dependencies]
 thiserror = "1.0.64"
