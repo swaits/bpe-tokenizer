@@ -64,8 +64,8 @@ tasks:
       cargo nextest --verbose --all-targets --all-features ||:
   - docs: |
       cd bpe-tokenizer/
-      rustup run stable cargo doc --no-deps
-      rustup run nightly cargo doc --no-deps ||:
+      rustup run stable cargo doc --no-deps --all-features
+      rustup run nightly cargo doc --no-deps --all-features ||:
   - mirror-to-github: |
       cd ~/bpe-tokenizer
       ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
