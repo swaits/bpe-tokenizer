@@ -15,9 +15,8 @@ fn main() {
     #[cfg(feature = "default-medium")]
     process_vocab("multi.wiki.bpe.vs320000.vocab");
 
-    // **DISABLED** until we can get a size exception on crates.io
-    // #[cfg(feature = "default-large")]
-    // process_vocab("multi.wiki.bpe.vs1000000.vocab");
+    #[cfg(feature = "default-large")]
+    process_vocab("multi.wiki.bpe.vs1000000.vocab");
 }
 
 #[cfg(any(
