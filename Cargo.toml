@@ -1,6 +1,6 @@
 [package]
 name = "bpe-tokenizer"
-version = "0.1.3"
+version = "0.1.4"
 authors = ["Stephen Waits <steve@waits.net>"]
 edition = "2021"
 description = "A BPE Tokenizer library."
@@ -12,8 +12,6 @@ homepage = "https://github.com/swaits/bpe-tokenizer/"
 repository = "https://github.com/swaits/bpe-tokenizer/"
 rust-version = "1.64"
 license-file = "LICENSE"
-exclude = ["vocab/multi.wiki.bpe.vs1000000.vocab"]
-# ^ default-large vocab is temporarily excluded until we can get a crates.io exception
 
 [dependencies]
 thiserror = "1.0.64"
@@ -34,9 +32,8 @@ bincode = { version = "1.3.3", optional = true }
 lz4_flex = { version = "0.11.3", optional = true }
 serde = { version = "1.0.210", optional = true }
 
-# **DISABLED** until we can get a crates.io exception
-# [package.metadata.docs.rs]
-# all-features = true
+[package.metadata.docs.rs]
+all-features = true
 
 [profile.dev]
 opt-level = 1

@@ -9,9 +9,6 @@ frequent token pairs.
 It supports **Unicode-aware** text segmentation for sentence and word splitting,
 making it suitable for processing a variety of languages and scripts.
 
-**NOTE:** The `default-large` feature is temporarily disabled due to crate size
-limitations; presently awaiting an exception from <help@crate.io>.
-
 ## Features
 
 - **Bring your own BPE token vocabularies**, or use ...
